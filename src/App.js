@@ -1,13 +1,15 @@
 import React from 'react';
-import Form from './components/form/form';
 import './App.css';
 import Jumbotron from './components/jumbotron';
+import Wrapper from './components/wrapper';
+import Directory from './pages/directory.js';
 
 function App() {
   return (
     <div className="App">
        <Jumbotron />
-        <Form />
+       <Wrapper />
+        <Directory />
       
     </div>
   );

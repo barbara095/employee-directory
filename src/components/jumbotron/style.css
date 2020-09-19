@@ -1,5 +1,9 @@
-.jumbotron {
-    background-color: cornflowerblue;
+.jumbotron.jumbotron-fluid {
+    background-image: url("/.../public/assets/images/background.jpg") !important;
+    display:flex;
     color: #fff;
     width: 100%;
+    font-weight: 600;
+    height: 400px;
+    background-size:cover;
 }
