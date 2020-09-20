@@ -1,6 +1,6 @@
-.jumbotron.jumbotron-fluid {
+.jumbotron {
     background-image: url("/.../public/assets/images/background.jpg") !important;
-    display:flex;
+    /* display:flex; */
     color: #fff;
     width: 100%;
     font-weight: 600;

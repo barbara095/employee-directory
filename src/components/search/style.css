@@ -1,0 +1,12 @@
+#search-bar {
+    width: 100px;
+}
+
+.btn.btn-success,
+.btn.btn-success:active,
+.btn.btn-success:hover,
+.btn.btn-success:focus,
+.btn.btn-success:default {
+    background-color: pink;
+    border-color: pink;
+} 

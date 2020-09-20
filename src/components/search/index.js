@@ -6,16 +6,20 @@ function Search(props) {
         <form>
             <div className="form-group">
                 <label>Search</label>
-                <input
+                <input label="search-bar"
                     id="search"
                     onChange={props.handleInputChange}
                     value={props.search}
                     name="search"
                     type="text"
-                    placeholder="Search for an employee"
+                    placeholder="Enter last name"
                 />
                 <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
-                    Search
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                 </button>
+                 <br />
+                 <button type="refresh" onClick={props.refreshPage} className="btn btn-danger">
+                 <i class="fa fa-refresh" aria-hidden="true"></i>
                  </button>
             </div>
         </form>

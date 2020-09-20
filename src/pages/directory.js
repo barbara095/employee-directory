@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Search from '../components/search/index';
 import Table from '../components/employeeTable/index';
 import Container from '../components/container/index';
-import Row from '../components/row/index';
 import Col from '../components/col/index';
 import API from '../utils/API';
 import "./style.css";
@@ -59,22 +58,27 @@ class Directory extends Component {
             
     }
 
+    refreshPage = event => {
+        event.window.location.reload(false);
+      }
+
     render() {
         return (
              <Container style={{ minHeight: "100vh" }}>
-                <Row>
+               
                       <Col size="md-12" >
                         <Search
                             value={this.state.search}
                             handleInputChange={this.handleInputChange}
                             handleFormSubmit={this.handleFormSubmit}
+                            refreshPage={this.refreshPage}
                         />
                         </Col>
-                    </Row>
+                   
 
                     <Col size="md-12">
                     <table className="table">
-                        <thread>
+                        <thead>
                             <tr>
                                 <th>First Name</th>
                                 <th>Last Name</th>
@@ -83,7 +87,7 @@ class Directory extends Component {
                                 <th>Age</th>
                                 <th>City</th>
                             </tr>
-                        </thread>
+                        </thead>
                         {[...this.state.employees].map((object) => (
                             <Table
                                 firstName={object.firstName}
