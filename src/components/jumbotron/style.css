@@ -1,8 +1,9 @@
 .jumbotron {
-    background: url("/Users/barbpotiriadis/employee-directory/public/assets/images/background.jpeg");
+    background: url("/src/assets/images/background.jpeg")!important;
     color: #fff;
     width: 100%;
     font-weight: 600;
     height: 100%;
-    /* background-size:cover; */
+    display: flex;
+    background-size: cover;
 }

@@ -37,3 +37,13 @@
     transform: rotate(360deg);
   }
 }
+
+.Jumbotron {
+  background: url("/public/assets/images/background.jpeg") fixed center no-repeat;
+  color: #fff;
+  width: 100%;
+  font-weight: 600;
+  height: 100%;
+  display: flex;
+  background-size: cover;
+}
