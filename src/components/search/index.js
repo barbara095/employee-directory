@@ -12,7 +12,7 @@ function Search(props) {
                     value={props.search}
                     name="search"
                     type="text"
-                    placeholder="Enter last name"
+                    placeholder="Search for employee"
                 />
                 <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
                     <i class="fa fa-search" aria-hidden="true"></i>

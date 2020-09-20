@@ -54,8 +54,7 @@ class Directory extends Component {
     handleFormSubmit = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
-        this.searchByName(this.state.search)
-            
+        this.searchByName(this.state.search);
     }
 
     refreshPage = event => {
