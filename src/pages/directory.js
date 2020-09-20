@@ -9,18 +9,14 @@ import "./style.css";
 class Directory extends Component {
     // Setting the component's initial state
     state = {
-        firstName: "",
-        lastName: "",
-        employeeID: Number,
-        age: Number,
-        role: "",
-        department: "",
-        yearsActive: Number,
+        search: "",
+        employees: [],
+        results: []
     };
 
     componentDidMount() {
         API.populateEmployees()
-        .then(res => this.setState({ results: res.data.results }))
+        .then(res => this.setState({ employees: res.data.results }))
         .catch((err) => console.log(err));
       }
 
@@ -37,6 +33,14 @@ class Directory extends Component {
     handleFormSubmit = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
+        API.populateEmployees(this.state.seach)
+        .then(res => {
+            if (res.data.status === "error") {
+                throw new Error(res.data.message);
+              }
+              this.setState({ employees: res.data.message, error: "" });
+        })
+        .catch(err => this.setState({ error: err.message }));
         const result = this.state.results.filter(
             (result) => 
             result.name.first()

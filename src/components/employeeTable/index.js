@@ -6,11 +6,10 @@ function Table(props) {
         <tr>
             <td>{props.firstName}</td>
             <td>{props.lastName}</td>
-            <td>{props.id}</td>
-            <td>{props.age}</td>
-            <td>{props.role}</td>
-            <td>{props.department}</td>
-            <td>{props.yearsActive}</td>
+            <td>{props.email}</td>
+            <td>{props.dob}</td>
+            <td>{props.phone}</td>
+            <td>{props.city}</td>
         </tr>
     )
 };
