@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASEURL = 'https://randomuser.me/api/?results=200';
+const BASEURL = 'https://randomuser.me/api/?results=50';
 
 // Export an object with a 'populateEmployees' method that searches the randomuser API for the passed query
 export default {

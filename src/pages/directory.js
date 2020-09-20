@@ -17,21 +17,21 @@ class Directory extends Component {
 
     componentDidMount() {
         API.populateEmployees()
-        .then(res => {
-            console.log(res);
-            this.setState({ 
-                employees: res.data.results.map((employee, information) => ({
-                    key: information,
-                    firstName: employee.name.first,
-                    lastName: employee.name.last,
-                    email: employee.email,
-                    age: employee.age,
-                    phone: employee.phone,
-                    city: employee.location.city,
-                })),
-            });
-        })
-        .catch((err) => console.log(err));
+            .then(res => {
+                console.log(res);
+                this.setState({
+                    employees: res.data.results.map((employee, information) => ({
+                        key: information,
+                        firstName: employee.name.first,
+                        lastName: employee.name.last,
+                        email: employee.email,
+                        phone: employee.phone,
+                        age: employee.dob.age,
+                        city: employee.location.city,
+                    })),
+                });
+            })
+            .catch((err) => console.log(err));
     };
 
     searchByName = (filter) => {
@@ -39,7 +39,7 @@ class Directory extends Component {
             let values = Object.values(employee).join("").toLocaleLowerCase();
             return values.indexOf(filter.toLowerCase()) !== -1;
         });
-        this.setState({ employees: filteredName});
+        this.setState({ employees: filteredName });
     };
 
     handleInputChange = event => {
@@ -56,33 +56,50 @@ class Directory extends Component {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
         this.searchByName(this.state.search)
-        .then(res => {
-            if (res.data.status === "error") {
-                throw new Error(res.data.message);
-              }
-              this.setState({ employees: res.data.message, error: "" });
-        })
-        .catch(err => this.setState({ error: err.message }));
+            
     }
 
     render() {
         return (
-            <div>
-                <Container style={{ minHeight: "100vh" }}>
+             <Container style={{ minHeight: "100vh" }}>
                 <Row>
-                    <Col />
-                    <Search 
-                      value = {this.state.search}
-                      handleInputChange = {this.handleInputChange}
-                      handleFormSubmit = {this.handleFormSubmit}
-                      />
-                    <Table />
+                      <Col size="md-12" >
+                        <Search
+                            value={this.state.search}
+                            handleInputChange={this.handleInputChange}
+                            handleFormSubmit={this.handleFormSubmit}
+                        />
+                        </Col>
+                    </Row>
 
-                </Row>
-                </Container>
-            </div>
+                    <Col size="md-12">
+                    <table className="table">
+                        <thread>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Phone number</th>
+                                <th>Age</th>
+                                <th>City</th>
+                            </tr>
+                        </thread>
+                        {[...this.state.employees].map((object) => (
+                            <Table
+                                firstName={object.firstName}
+                                lastName={object.lastName}
+                                email={object.email}
+                                phone={object.phone}
+                                age={object.age}
+                                city={object.city}
+                                key={object.key}
+                            />
+                        ))}
+                    </table>
+                </Col>
+        </Container >
         );
-    }
-}
+    };
+};
 
 export default Directory;

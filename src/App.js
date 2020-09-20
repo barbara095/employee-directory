@@ -9,7 +9,7 @@ function App() {
     <div className="App">
        <Jumbotron />
        <Wrapper>
-        <Directory />
+        <Directory component={Directory}/>
       </Wrapper>
     </div>
   );
