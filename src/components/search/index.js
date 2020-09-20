@@ -18,9 +18,10 @@ function Search(props) {
                     <i class="fa fa-search" aria-hidden="true"></i>
                  </button>
                  <br />
-                 <button type="refresh" onClick={props.refreshPage} className="btn btn-danger">
+                 <button type="submit" onClick={props.refreshPage} className="btn btn-danger">
                  <i class="fa fa-refresh" aria-hidden="true"></i>
                  </button>
+                 
             </div>
         </form>
     )

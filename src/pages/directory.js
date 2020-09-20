@@ -11,7 +11,7 @@ class Directory extends Component {
     state = {
         search: "",
         employees: [],
-        results: []
+        order: "ascending"
     };
 
     componentDidMount() {
@@ -41,6 +41,42 @@ class Directory extends Component {
         this.setState({ employees: filteredName });
     };
 
+    sortFirstName = () => {
+        if (this.state.order === "ascending") {
+            var sorted = this.state.employees.sort((a, b) =>
+                a.firstName > b.firstName ? 1 : -1)
+            this.setState({
+                employees: sorted,
+                order: "descending"
+            })
+        } else {
+            sorted = this.state.employees.sort((a, b) =>
+                a.firstName > b.firstName ? -1 : 1)
+            this.setState({
+                employees: sorted,
+                order: "ascending"
+            })
+        }
+    }
+
+    sortLastName = () => {
+        if (this.state.order === "ascending") {
+            var sorted = this.state.employees.sort((a, b) =>
+                a.lastName > b.lastName ? 1 : -1)
+            this.setState({
+                employees: sorted,
+                order: "descending"
+            })
+        } else {
+            sorted = this.state.employees.sort((a, b) =>
+                a.lastName > b.lastName ? -1 : 1)
+            this.setState({
+                employees: sorted,
+                order: "ascending"
+            })
+        }
+    }
+
     handleInputChange = event => {
         // Getting the value and name of the input which triggered the change
         const value = event.target.value;
@@ -59,28 +95,38 @@ class Directory extends Component {
 
     refreshPage = event => {
         event.window.location.reload(false);
-      }
+    }
 
     render() {
         return (
-             <Container style={{ minHeight: "100vh" }}>
-               
-                      <Col size="md-12" >
-                        <Search
-                            value={this.state.search}
-                            handleInputChange={this.handleInputChange}
-                            handleFormSubmit={this.handleFormSubmit}
-                            refreshPage={this.refreshPage}
-                        />
-                        </Col>
-                   
+            <Container style={{ minHeight: "100vh" }}>
 
-                    <Col size="md-12">
+                <Col size="md-12" >
+                    <Search
+                        value={this.state.search}
+                        handleInputChange={this.handleInputChange}
+                        handleFormSubmit={this.handleFormSubmit}
+                        refreshPage={this.refreshPage}
+                    />
+                </Col>
+
+
+                <Col size="md-12">
                     <table className="table">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th >First Name 
+                                    <button type="submit" class="sort-btn" 
+                                    onClick ={this.sortFirstName} 
+                                    className="btn">Sort 
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    </button></th>
+                                <th>Last Name 
+                                    <button type="submit" class="sort-btn" 
+                                    onClick ={this.sortLastName} 
+                                    className="btn">Sort 
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                                    </button></th>
                                 <th>Email</th>
                                 <th>Phone number</th>
                                 <th>Age</th>
@@ -100,7 +146,7 @@ class Directory extends Component {
                         ))}
                     </table>
                 </Col>
-        </Container >
+            </Container >
         );
     };
 };
