@@ -3,6 +3,7 @@ import Search from '../components/search/index';
 import Table from '../components/employeeTable/index';
 import Container from '../components/container/index';
 import Row from '../components/row/index';
+import Col from '../components/col/index';
 import API from '../utils/API';
 import "./style.css";
 
@@ -16,9 +17,30 @@ class Directory extends Component {
 
     componentDidMount() {
         API.populateEmployees()
-        .then(res => this.setState({ employees: res.data.results }))
+        .then(res => {
+            console.log(res);
+            this.setState({ 
+                employees: res.data.results.map((employee, information) => ({
+                    key: information,
+                    firstName: employee.name.first,
+                    lastName: employee.name.last,
+                    email: employee.email,
+                    age: employee.age,
+                    phone: employee.phone,
+                    city: employee.location.city,
+                })),
+            });
+        })
         .catch((err) => console.log(err));
-      }
+    };
+
+    searchByName = (filter) => {
+        const filteredName = this.state.employees.filter((employee) => {
+            let values = Object.values(employee).join("").toLocaleLowerCase();
+            return values.indexOf(filter.toLowerCase()) !== -1;
+        });
+        this.setState({ employees: filteredName});
+    };
 
     handleInputChange = event => {
         // Getting the value and name of the input which triggered the change
@@ -33,7 +55,7 @@ class Directory extends Component {
     handleFormSubmit = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
-        API.populateEmployees(this.state.seach)
+        this.searchByName(this.state.search)
         .then(res => {
             if (res.data.status === "error") {
                 throw new Error(res.data.message);
@@ -41,34 +63,19 @@ class Directory extends Component {
               this.setState({ employees: res.data.message, error: "" });
         })
         .catch(err => this.setState({ error: err.message }));
-        const result = this.state.results.filter(
-            (result) => 
-            result.name.first()
-        )
-        // if (!search) {
-        //     return;
-        //   }
-
-        // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
-        alert(`Successfully added ${this.state.firstName} ${this.state.lastName} to the Directory!`);
-        this.setState({
-            firstName: "",
-            lastName: "",
-            employeeID: Number,
-            age: Number,
-            role: "",
-            department: "",
-            yearsActive: Number,
-        });
     }
 
     render() {
-        // Notice how each input has a `value`, `name`, and `onChange` prop
         return (
             <div>
                 <Container style={{ minHeight: "100vh" }}>
                 <Row>
-                    <Search />
+                    <Col />
+                    <Search 
+                      value = {this.state.search}
+                      handleInputChange = {this.handleInputChange}
+                      handleFormSubmit = {this.handleFormSubmit}
+                      />
                     <Table />
 
                 </Row>
