@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import Search from '../components/search/index';
+import Table from '../components/employeeTable/index';
+import Container from '../components/container/index';
+import Row from '../components/row/index';
+import API from '../utils/API';
 import "./style.css";
 
 class Directory extends Component {
@@ -13,11 +18,16 @@ class Directory extends Component {
         yearsActive: Number,
     };
 
+    componentDidMount() {
+        API.populateEmployees()
+        .then(res => this.setState({ results: res.data.results }))
+        .catch((err) => console.log(err));
+      }
+
     handleInputChange = event => {
         // Getting the value and name of the input which triggered the change
         const value = event.target.value;
         const name = event.target.name;
-
         // Updating the input's state
         this.setState({
             [name]: value
@@ -27,7 +37,10 @@ class Directory extends Component {
     handleFormSubmit = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
-
+        const result = this.state.results.filter(
+            (result) => 
+            result.name.first()
+        )
         // if (!search) {
         //     return;
         //   }
@@ -49,55 +62,13 @@ class Directory extends Component {
         // Notice how each input has a `value`, `name`, and `onChange` prop
         return (
             <div>
-                <form className="form">
-                    <input
-                        value={this.state.firstName}
-                        name="firstName"
-                        onChange={this.handleInputChange}
-                        type="text"
-                        placeholder="First Name"
-                    />
-                    <input
-                        value={this.state.lastName}
-                        name="lastName"
-                        onChange={this.handleInputChange}
-                        type="text"
-                        placeholder="Last Name"
-                    />
-                    <input
-                        value={this.state.age}
-                        name="age"
-                        onChange={this.handleInputChange}
-                        type="text"
-                        placeholder="Age"
-                        maxLength={15}
-                    />
-                    <input
-                        value={this.state.role}
-                        name="role"
-                        onChange={this.handleInputChange}
-                        type="text"
-                        placeholder="Role"
-                        maxLength={15}
-                    />
-                    <input
-                        value={this.state.department}
-                        name="department"
-                        onChange={this.handleInputChange}
-                        type="text"
-                        placeholder="Department"
-                        maxLength={15}
-                    />
-                    <input
-                        value={this.state.yearsActive}
-                        name="years"
-                        onChange={this.handleInputChange}
-                        type="text"
-                        placeholder="Years Active"
-                        maxLength={50}
-                    />
-                    <button onClick={this.handleFormSubmit}>Submit</button>
-                </form>
+                <Container style={{ minHeight: "100vh" }}>
+                <Row>
+                    <Search />
+                    <Table />
+
+                </Row>
+                </Container>
             </div>
         );
     }
