@@ -7,4 +7,8 @@ This is a React Application designed to assist managers in accessing and finding
 AS A user, I want to access a complete list of employees in a directory where I can quickly access, filter and sort their information. 
 
 ## Application 
+
+https://barbara095.github.io/employee-directory/
+
+
 ![Image 1](src/assets/images/app.png)
