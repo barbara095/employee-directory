@@ -24,8 +24,8 @@ class Directory extends Component {
                         firstName: employee.name.first,
                         lastName: employee.name.last,
                         email: employee.email,
-                        phone: employee.phone,
                         age: employee.dob.age,
+                        phone: employee.phone,
                         city: employee.location.city,
                     })),
                 });

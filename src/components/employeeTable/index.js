@@ -7,8 +7,8 @@ function Table(props) {
             <td>{props.firstName}</td>
             <td>{props.lastName}</td>
             <td>{props.email}</td>
-            <td>{props.age}</td>
             <td>{props.phone}</td>
+            <td>{props.age}</td>
             <td>{props.city}</td>
         </tr>
     )
